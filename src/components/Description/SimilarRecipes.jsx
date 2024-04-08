@@ -27,34 +27,25 @@ const SimilarRecipes = ({ recipe }) => {
 
     useEffect(() => {
         const fetchSimilarDescriptions = async () => {
-            if (similarRecipe.length > 0) {
-                const ids = similarRecipe.slice(0, 6).map(recipeItem => recipeItem.id).join(',');
-                const storedDescriptions = JSON.parse(localStorage.getItem('similarDescriptions')) || {};
-                const missingIds = ids.split(',').filter(id => !storedDescriptions[id]);
-
-                if (missingIds.length > 0) {
-                    try {
-                        setLoader(true);
-                        const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${missingIds.join(',')}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
-                        const newDescriptions = response.data.reduce((acc, curr) => {
-                            acc[curr.id] = curr;
-                            return acc;
-                        }, {});
-                        setLoader(false);
-                        const updatedDescriptions = { ...storedDescriptions, ...newDescriptions };
-                        setSimilarDescriptions(Object.values(updatedDescriptions));
-                        localStorage.setItem('similarDescriptions', JSON.stringify(updatedDescriptions));
-                    } catch (error) {
-                        console.error('Error fetching similar recipe descriptions:', error.message);
-                    }
-                } else {
-                    setSimilarDescriptions(Object.values(storedDescriptions));
-                }
+          if (similarRecipe.length > 0) {
+            const ids = similarRecipe.map(recipeItem => recipeItem.id).join(',');
+            try {
+              setLoader(true);
+              const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
+    
+              setLoader(false);
+    
+              setSimilarDescriptions(response.data);
+    
+            } catch (error) {
+              console.error('Error fetching similar recipe descriptions:', error.message);
             }
+    
+          }
         };
-
+    
         fetchSimilarDescriptions();
-    }, [similarRecipe]);
+      }, [similarRecipe]);
 
     const [dotCount, setDotCount] = useState(1);
 
