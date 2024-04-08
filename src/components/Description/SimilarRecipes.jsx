@@ -14,7 +14,7 @@ const SimilarRecipes = ({ recipe }) => {
         const fetchSimilarRecipes = async () => {
             try {
                 setLoader(true);
-                const response = await axios.get(`https://api.spoonacular.com/recipes/${recipe.id}/similar?apiKey=a6cbffac8c7a431897721244d5754ceb`);
+                const response = await axios.get(`https://api.spoonacular.com/recipes/${recipe.id}/similar?apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
                 setSimilarRecipe(response.data);
                 setLoader(false);
             } catch (error) {
@@ -35,7 +35,7 @@ const SimilarRecipes = ({ recipe }) => {
                 if (missingIds.length > 0) {
                     try {
                         setLoader(true);
-                        const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${missingIds.join(',')}&apiKey=a6cbffac8c7a431897721244d5754ceb`);
+                        const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${missingIds.join(',')}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
                         const newDescriptions = response.data.reduce((acc, curr) => {
                             acc[curr.id] = curr;
                             return acc;

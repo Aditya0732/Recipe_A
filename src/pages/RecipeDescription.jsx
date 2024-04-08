@@ -26,7 +26,7 @@ const RecipeDescription = () => {
             setRecipe(JSON.parse(storedRecipe));
         } else {
             setLoader(true);
-            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=a6cbffac8c7a431897721244d5754ceb`)
+            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=0152dc2c3477445fb7cd64a993ddbf7c`)
                 .then(response => {
                     setRecipe(response.data);
                     console.log(response.data);
@@ -42,7 +42,7 @@ const RecipeDescription = () => {
             setNutrition(JSON.parse(storedNutrition));
         } else {
             setLoader(true);
-            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget.json?apiKey=a6cbffac8c7a431897721244d5754ceb`)
+            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget.json?apiKey=0152dc2c3477445fb7cd64a993ddbf7c`)
                 .then(response => {
                     setNutrition(response.data);
                     localStorage.setItem(`nutrition_${recipeId}`, JSON.stringify(response.data));

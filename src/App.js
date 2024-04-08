@@ -18,7 +18,7 @@ function App() {
   const handleSearch = async () => {
     try {
       setLoader(true);
-      const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=a6cbffac8c7a431897721244d5754ceb&query=${searchTerm}`);
+      const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=0152dc2c3477445fb7cd64a993ddbf7c&query=${searchTerm}`);
       setSimilarRecipe(response.data.results);
       setLoader(false);
     } catch (error) {
@@ -32,7 +32,7 @@ function App() {
         const ids = similarRecipe.map(recipeItem => recipeItem.id).join(',');
         try {
           setLoader(true);
-          const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=a6cbffac8c7a431897721244d5754ceb`);
+          const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
 
           setLoader(false);
 
