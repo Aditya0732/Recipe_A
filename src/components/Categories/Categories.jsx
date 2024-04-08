@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { GoDotFill } from 'react-icons/go';
+import { Link } from 'react-router-dom';
 
 const Categories = ({ query }) => {
   const [similarRecipe, setSimilarRecipe] = useState([]);
@@ -124,7 +125,7 @@ const Categories = ({ query }) => {
                       <h1 className='text-sm' dangerouslySetInnerHTML={{ __html: recipeItem?.summary }}></h1>
                     </div>
                     <div className="flex justify-end">
-                      <a href={`/recipe/${recipeItem.id}`} className="text-[#ff642b] text-sm hover:underline">...Read more</a>
+                    <Link to={`/recipe/${recipeItem.id}`} className="text-[#ff642b] text-sm hover:underline">...Read more</Link>
                     </div>
                   </div>
                 </div>
