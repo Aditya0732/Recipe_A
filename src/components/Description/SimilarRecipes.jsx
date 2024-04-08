@@ -2,13 +2,19 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { GoDotFill } from 'react-icons/go';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const SimilarRecipes = ({ recipe }) => {
     const [similarRecipe, setSimilarRecipe] = useState([]);
     const [similarDescriptions, setSimilarDescriptions] = useState([]);
     const [loader, setLoader] = useState(false);
+    const navigate = useNavigate();
+
+    const handleNav = (recipe) => {
+        navigate(`/recipe/${recipe.id}`);
+        window.location.reload();
+    }
 
     useEffect(() => {
         const fetchSimilarRecipes = async () => {
@@ -27,25 +33,25 @@ const SimilarRecipes = ({ recipe }) => {
 
     useEffect(() => {
         const fetchSimilarDescriptions = async () => {
-          if (similarRecipe.length > 0) {
-            const ids = similarRecipe.map(recipeItem => recipeItem.id).join(',');
-            try {
-              setLoader(true);
-              const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
-    
-              setLoader(false);
-    
-              setSimilarDescriptions(response.data);
-    
-            } catch (error) {
-              console.error('Error fetching similar recipe descriptions:', error.message);
+            if (similarRecipe.length > 0) {
+                const ids = similarRecipe.map(recipeItem => recipeItem.id).join(',');
+                try {
+                    setLoader(true);
+                    const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
+
+                    setLoader(false);
+
+                    setSimilarDescriptions(response.data);
+
+                } catch (error) {
+                    console.error('Error fetching similar recipe descriptions:', error.message);
+                }
+
             }
-    
-          }
         };
-    
+
         fetchSimilarDescriptions();
-      }, [similarRecipe]);
+    }, [similarRecipe]);
 
     const [dotCount, setDotCount] = useState(1);
 
@@ -105,7 +111,7 @@ const SimilarRecipes = ({ recipe }) => {
                                 <h1 className='text-sm' dangerouslySetInnerHTML={{ __html: recipeItem?.summary }}></h1>
                             </div>
                             <div className="flex justify-end">
-                                <Link to={`/recipe/${recipeItem.id}`} className="text-[#ff642b] text-sm hover:underline">...Read more</Link>
+                               <div onClick={() => handleNav(recipeItem)} className="text-[#ff642b] cursor-pointer text-sm hover:underline">...Read more</div>
                             </div>
                         </div>
                     </div>
