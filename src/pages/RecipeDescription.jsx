@@ -19,14 +19,13 @@ const RecipeDescription = () => {
     useEffect(() => {
         const currentPageUrl = window.location.href;
         const recipeId = extractIdFromPageUrl(currentPageUrl);
-
         // Check local storage for existing recipe data
         const storedRecipe = localStorage.getItem(`recipe_${recipeId}`);
         if (storedRecipe) {
             setRecipe(JSON.parse(storedRecipe));
         } else {
             setLoader(true);
-            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=0152dc2c3477445fb7cd64a993ddbf7c`)
+            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=84a634f7e198482e9c4ee29a5d3d00c6`)
                 .then(response => {
                     setRecipe(response.data);
                     console.log(response.data);
@@ -42,7 +41,7 @@ const RecipeDescription = () => {
             setNutrition(JSON.parse(storedNutrition));
         } else {
             setLoader(true);
-            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget.json?apiKey=0152dc2c3477445fb7cd64a993ddbf7c`)
+            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget.json?apiKey=84a634f7e198482e9c4ee29a5d3d00c6`)
                 .then(response => {
                     setNutrition(response.data);
                     localStorage.setItem(`nutrition_${recipeId}`, JSON.stringify(response.data));

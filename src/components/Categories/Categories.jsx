@@ -31,7 +31,7 @@ const Categories = ({ query }) => {
     const fetchDescriptions = async () => {
       try {
         setLoader(true);
-        const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=0152dc2c3477445fb7cd64a993ddbf7c&query=${query}`);
+        const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=84a634f7e198482e9c4ee29a5d3d00c6&query=${query}`);
         setSimilarRecipe(response.data.results);
         setLoader(false);
 
@@ -40,7 +40,7 @@ const Categories = ({ query }) => {
 
         if (ids) {
           setLoader(true);
-          const descriptionsResponse = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
+          const descriptionsResponse = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=84a634f7e198482e9c4ee29a5d3d00c6`);
           const newDescriptions = descriptionsResponse.data.reduce((acc, curr) => {
             acc[curr.id] = curr;
             return acc;

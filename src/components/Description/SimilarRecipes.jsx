@@ -20,7 +20,7 @@ const SimilarRecipes = ({ recipe }) => {
         const fetchSimilarRecipes = async () => {
             try {
                 setLoader(true);
-                const response = await axios.get(`https://api.spoonacular.com/recipes/${recipe.id}/similar?apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
+                const response = await axios.get(`https://api.spoonacular.com/recipes/${recipe.id}/similar?apiKey=84a634f7e198482e9c4ee29a5d3d00c6`);
                 setSimilarRecipe(response.data);
                 setLoader(false);
             } catch (error) {
@@ -37,7 +37,7 @@ const SimilarRecipes = ({ recipe }) => {
                 const ids = similarRecipe.map(recipeItem => recipeItem.id).join(',');
                 try {
                     setLoader(true);
-                    const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=0152dc2c3477445fb7cd64a993ddbf7c`);
+                    const response = await axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${ids}&apiKey=84a634f7e198482e9c4ee29a5d3d00c6`);
 
                     setLoader(false);
 
